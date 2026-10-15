@@ -1,27 +1,27 @@
 const serviceContent = {
-  strategy: {
-    label: "ESTRATÉGIA DIGITAL",
-    title: "Clareza para escolher o próximo passo.",
-    description: "Descobrimos onde a mudança pode criar mais valor e desenhamos um caminho que a sua equipa consegue pôr em prática.",
-    items: ["Diagnóstico e visão digital", "Roadmap de transformação", "Estratégia de produto"],
+  diagnostic: {
+    label: "DIAGNÓSTICO DE DADOS",
+    title: "Saiba onde o reporting pode melhorar.",
+    description: "Mapeamos fontes, ficheiros e necessidades da equipa para definir prioridades e um plano de trabalho claro.",
+    items: ["Levantamento de processos", "Qualidade e organização dos dados", "Plano de próximos passos"],
   },
-  automation: {
-    label: "AUTOMAÇÃO & IA",
-    title: "Menos tarefas repetidas. Mais espaço para pensar.",
-    description: "Automatizamos processos com critério e aplicamos inteligência artificial onde melhora o trabalho, sem acrescentar complexidade.",
-    items: ["Automação de processos", "Assistentes com IA", "Integração de ferramentas"],
+  powerbi: {
+    label: "DASHBOARD POWER BI",
+    title: "Indicadores claros, numa única vista.",
+    description: "Desenhamos relatórios Power BI ajustados às perguntas do negócio e às fontes de dados disponíveis.",
+    items: ["Modelo de dados", "Relatórios e indicadores", "Validação com a equipa"],
   },
-  experience: {
-    label: "EXPERIÊNCIA DIGITAL",
-    title: "Experiências que fazem tudo parecer simples.",
-    description: "Desenhamos produtos e serviços digitais intuitivos, alinhados com as necessidades das pessoas e os objetivos do negócio.",
-    items: ["Pesquisa e UX", "Design de produto", "Websites e plataformas"],
+  excel: {
+    label: "AUTOMAÇÃO EXCEL",
+    title: "Menos tarefas repetidas na preparação dos dados.",
+    description: "Organizamos e automatizamos fluxos em Excel e Power Query para tornar o reporting mais consistente.",
+    items: ["Power Query", "Consolidação de ficheiros", "Automatização de tarefas"],
   },
-  data: {
-    label: "DADOS & TECNOLOGIA",
-    title: "Decisões melhores começam com bons sinais.",
-    description: "Organizamos dados e sistemas para dar às equipas uma visão clara e uma base tecnológica pronta para evoluir.",
-    items: ["Estratégia de dados", "Dashboards e analytics", "Arquitetura e integração"],
+  training: {
+    label: "FORMAÇÃO E SUPORTE",
+    title: "Mais autonomia para a sua equipa.",
+    description: "Apoiamos a utilização e evolução dos relatórios com formação prática e acompanhamento definido em conjunto.",
+    items: ["Formação Power BI e Excel", "Documentação", "Apoio à evolução"],
   },
 };
 
@@ -30,6 +30,7 @@ const panel = document.querySelector("#service-panel");
 
 function selectService(tab, moveFocus = false) {
   const content = serviceContent[tab.dataset.service];
+  if (!content) return;
   tabs.forEach((item) => {
     const selected = item === tab;
     item.classList.toggle("is-active", selected);
@@ -37,12 +38,12 @@ function selectService(tab, moveFocus = false) {
     item.tabIndex = selected ? 0 : -1;
   });
   panel.setAttribute("aria-labelledby", tab.id);
-  panel.innerHTML = `<div class="service-icon" aria-hidden="true">↗</div>
+  panel.innerHTML = `<div class="service-icon" aria-hidden="true">${tab.textContent.trim().slice(0, 2)}</div>
     <p class="eyebrow">${content.label}</p>
     <h3>${content.title}</h3>
     <p class="service-description">${content.description}</p>
     <ul class="service-list">${content.items.map((item) => `<li>${item}</li>`).join("")}</ul>
-    <a class="text-link" href="#contacto">Fale connosco <span>↗</span></a>`;
+    <a class="text-link" href="#contacto">Falar sobre o meu caso <span>↗</span></a>`;
   if (moveFocus) tab.focus();
 }
 
@@ -105,19 +106,47 @@ document.querySelector("#year").textContent = new Date().getFullYear();
 
 const contactForm = document.querySelector("#contact-form");
 const formStatus = document.querySelector("#form-status");
-contactForm.addEventListener("submit", (event) => {
+contactForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   if (!contactForm.reportValidity()) return;
+
   const formData = new FormData(contactForm);
-  const subject = encodeURIComponent(`Contacto de ${formData.get("name")} — ${formData.get("service")}`);
-  const body = encodeURIComponent([
-    `Nome: ${formData.get("name")}`,
-    `Email: ${formData.get("email")}`,
-    `Área: ${formData.get("service")}`,
-    "",
-    `Mensagem: ${formData.get("message") || "Sem mensagem adicional."}`,
-  ].join("\n"));
+  const endpoint = contactForm.dataset.endpoint.trim();
+  const submitButton = contactForm.querySelector('[type="submit"]');
+  const fields = [
+    ["Nome", formData.get("name")],
+    ["Email", formData.get("email")],
+    ["Empresa", formData.get("company") || "Não indicado"],
+    ["Ferramentas", formData.get("tools")],
+    ["Desafio", formData.get("problem")],
+    ["Contexto", formData.get("message") || "Não indicado"],
+  ];
+
+  if (!endpoint) {
+    const summary = fields.map(([label, value]) => `${label}: ${value}`).join("\n");
+    try {
+      await navigator.clipboard.writeText(summary);
+      formStatus.classList.remove("is-error");
+      formStatus.textContent = "Resumo copiado. O formulário ainda não envia dados: configure o endpoint de contacto para receber pedidos.";
+    } catch {
+      formStatus.classList.add("is-error");
+      formStatus.textContent = `O formulário ainda não envia dados. Copie este resumo:\n${summary}`;
+    }
+    return;
+  }
+
+  submitButton.disabled = true;
   formStatus.classList.remove("is-error");
-  formStatus.textContent = "A abrir a sua aplicação de email para concluir o envio…";
-  window.location.href = `mailto:ola@nortedigital.pt?subject=${subject}&body=${body}`;
+  formStatus.textContent = "A enviar o pedido…";
+  try {
+    const response = await fetch(endpoint, { method: "POST", body: formData, headers: { Accept: "application/json" } });
+    if (!response.ok) throw new Error("Submission failed");
+    contactForm.reset();
+    formStatus.textContent = "Pedido enviado. Obrigado pelo contacto.";
+  } catch {
+    formStatus.classList.add("is-error");
+    formStatus.textContent = "Não foi possível enviar o pedido agora. Tente novamente mais tarde.";
+  } finally {
+    submitButton.disabled = false;
+  }
 });
