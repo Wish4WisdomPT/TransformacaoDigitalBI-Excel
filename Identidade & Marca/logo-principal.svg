@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 200" role="img" aria-labelledby="title desc">
+  <title id="title">Wish4wisdom — Power BI &amp; Dados</title>
+  <desc id="desc">Símbolo de barras ascendentes com órbita, acompanhado pelo nome Wish4wisdom e pela assinatura Power BI &amp; Dados.</desc>
+  <g transform="translate(0 0)">
+    <ellipse cx="130" cy="85" rx="98" ry="39" transform="rotate(-24 130 85)" fill="none" stroke="#8DB8EF" stroke-width="8"/>
+    <rect x="37" y="90" width="42" height="66" rx="9" fill="#48D7FF"/>
+    <rect x="109" y="55" width="42" height="101" rx="9" fill="#4F8DFF"/>
+    <rect x="181" y="20" width="42" height="136" rx="9" fill="#1769E8"/>
+    <circle cx="39" cy="122" r="5" fill="#1769E8"/>
+    <circle cx="221" cy="50" r="5" fill="#48D7FF"/>
+  </g>
+  <text x="275" y="95" fill="#0B1730" font-family="Manrope, Arial, sans-serif" font-size="47" font-weight="700" letter-spacing="-1.5">Wish4wisdom</text>
+  <text x="279" y="128" fill="#566B91" font-family="DM Mono, Consolas, monospace" font-size="15" letter-spacing="2">POWER BI &amp; DADOS</text>
+</svg>
