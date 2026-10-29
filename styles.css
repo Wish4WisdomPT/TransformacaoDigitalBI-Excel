@@ -95,6 +95,7 @@ body{background:var(--paper)}
 .services-section .service-list{color:#e5edfa}.services-section .service-list li:before{color:#48d7ff}
 .services-section .text-link{color:#f8fbff}.services-section .text-link:hover{color:#48d7ff}
 .section-lime{background:linear-gradient(120deg,#dceaff,#c7e7ff)}
+.method-intro .eyebrow-dot{background:#155eef}
 .contact-section{background:#eaf1fb;color:var(--ink)}
 .contact-section .eyebrow{color:#425573}.contact-section .eyebrow-dot{background:#1769e8}
 .contact-copy>p:not(.eyebrow){color:#425573}.contact-aside p{color:#50627d}.aside-line{background:#1769e8}
