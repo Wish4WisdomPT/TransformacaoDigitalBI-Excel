@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="85mm" height="55mm" viewBox="0 0 850 550" role="img" aria-label="Cart&#227;o de visita Wish4wisdom &#8212; Wish4wisdom (frente)">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:wght@400;500&amp;family=Manrope:wght@700;800&amp;display=swap');
+    .name { font-family: Manrope, Arial, sans-serif; font-weight: 800; letter-spacing: -1px; }
+    .brand { font-family: Manrope, Arial, sans-serif; font-weight: 700; letter-spacing: -1px; }
+    .role { font-family: 'DM Sans', Arial, sans-serif; font-weight: 500; }
+    .mono { font-family: 'DM Mono', Consolas, monospace; }
+  </style>
+  <defs><clipPath id="card"><rect width="850" height="550"/></clipPath></defs>
+  <g clip-path="url(#card)">
+  <rect width="850" height="550" fill="#FBFDFF"/>
+  <ellipse cx="860" cy="560" rx="300" ry="120" transform="rotate(-24 860 560)" fill="none" stroke="#D9E2F0" stroke-width="3"/>
+  <ellipse cx="860" cy="560" rx="220" ry="84" transform="rotate(-24 860 560)" fill="none" stroke="#D9E2F0" stroke-width="2"/>
+  <rect x="0" y="0" width="12" height="550" fill="#155EEF"/>
+  </g>
+  <svg x="296" y="34" width="270" height="208" viewBox="0 0 260 200">
+    <ellipse cx="130" cy="85" rx="98" ry="39" transform="rotate(-24 130 85)" fill="none" stroke="#8DB8EF" stroke-width="8"/>
+    <rect x="37" y="90" width="42" height="66" rx="9" fill="#48D7FF"/>
+    <rect x="109" y="55" width="42" height="101" rx="9" fill="#4F8DFF"/>
+    <rect x="181" y="20" width="42" height="136" rx="9" fill="#1769E8"/>
+    <circle cx="39" cy="122" r="5" fill="#1769E8"/>
+    <circle cx="221" cy="50" r="5" fill="#48D7FF"/>
+  </svg>
+  <text x="431" y="300" class="brand" font-size="66" fill="#0B1730" text-anchor="middle">Wish4wisdom</text>
+  <text x="433" y="338" class="mono" font-size="16" letter-spacing="4.5" fill="#566B91" text-anchor="middle">POWER BI &amp; DADOS</text>
+  <rect x="409" y="378" width="44" height="6" rx="3" fill="#48D7FF"/>
+  <text x="431" y="448" class="brand" font-size="25" letter-spacing="-0.3" fill="#0B1730" text-anchor="middle">Dados mais claros. <tspan fill="#155EEF">Decis&#245;es mais informadas.</tspan></text>
+</svg>
